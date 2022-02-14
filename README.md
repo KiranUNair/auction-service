@@ -6,3 +6,4 @@ AWS Cloudformation
 AWS DynamoDB
 AWS SQS, SES
 AWS S3
+AWS API Gateway
