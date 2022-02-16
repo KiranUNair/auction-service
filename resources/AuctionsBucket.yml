@@ -1,0 +1,23 @@
+AuctionsBucket:
+  Type: AWS::S3::Bucket
+  Properties:
+    BucketName: ${self:custom.AuctionsBucket.name}
+    LifecycleConfiguration:
+      Rules:
+        - Status: Enabled
+          Id: ExpirePictures
+          ExpirationInDays: 1
+
+#Specify a policy so that Bucket is read-only as by default buckets are not accessible
+AuctionsBucketPolicy:
+  Type: AWS::S3::BucketPolicy
+  Properties:
+    Bucket: !Ref AuctionsBucket
+    PolicyDocument:
+      Statement:
+        - Sid: PublicRead
+          Effect: Allow
+          Principal: '*'
+          Action:
+            - s3:GetObject
+          Resource: arn:aws:s3:::${self:custom.AuctionsBucket.name}/*
